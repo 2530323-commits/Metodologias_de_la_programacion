@@ -79,3 +79,28 @@ print(programming_languages.strip())
 #Syntax Error con String
 message = 'una fortaleza de "python" es su comunidad'
 print (message)
+
+# f-strings
+famous_person= "Taylor Swift"
+message = f"{famous_person} una vez dijo me voy al Oxxo en avion."
+print(message)  
+print(f"{famous_person.upper()} una vez dijo me voy al Oxxo en avion.")
+
+#actividad
+"""
+Elige el nombre de una persona (quien tu quieras)
+Elige una cita famosa de esta persona.
+Iguala ambos strings a una variable.
+1)Realiza la concatenacion utilizando el signo de suma 
+2)Realiza la concatenacion utilizando fstrings
+
+"""
+quote= "Y yo soy Iron Man"
+famous_person= "Iron Man"
+famous_message = famous_person+ " "+quote
+print(famous_person+ " "+quote)
+
+print(famous_message)
+
+f_print_message = f"{famous_person} {quote}"
+print (f_print_message)
