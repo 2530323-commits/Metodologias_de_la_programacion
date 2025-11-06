@@ -93,7 +93,7 @@ print(motorcycles) #Salida, ['honda', 'yamaha', 'suzuki', 'ducati']
 too_expensive = 'ducati'
 motorcycles.remove(too_expensive)
 print(motorcycles) #Salida: ['honda', 'yamaha', 'suzuki']
-print(f"\nA {too_expensive.title()} is too expensive for me.")
+print(f"\n {too_expensive.title()} is too expensive for me.")
 """
 
 Ordenar una lista permanentemente
@@ -105,3 +105,11 @@ print(cars) #Salida, ['bmw', 'audi', 'toyota', 'subaru']
 cars.sort()
 print(cars) #Salida: ['audi', 'bmw', 'subaru', 'toyota']
 
+
+
+
+cars = ["kia", "ford", "ford", "tesla", "volvo", "chevrolet"]
+print(cars)
+print(sorted(cars))
+sorted_lists=sorted(cars)
+print("lista original: ", cars)
