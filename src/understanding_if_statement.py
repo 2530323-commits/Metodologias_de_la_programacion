@@ -80,12 +80,19 @@ can_edit = False
 #Preguntas la edad de usuario
 # y decirle si tiene la edad suficiente para votar
 #input("") -> str
+try:
+    age = int(input("\nEscribe tu edad :"))
 
-age = int(input("\nEscribe tu edad :"))
-print(f"\ntu edad es: {age}")
+except:
+    age = -1
+    print("Error, ingresaste un caracter no valido")
 
-if (age) >= 18:
+if age >= 100:
+    print("Tienes mas de un siglo")
+elif (age) >= 18 and age < 100:
     print("Tu tienes la edad para votar")  
-else:
+elif age >= 0 and age < 18:
     print("Tu no tienes la edad para votar")
+else:
+    print("Tuviste un error")
 
