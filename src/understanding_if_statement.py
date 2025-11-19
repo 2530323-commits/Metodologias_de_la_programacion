@@ -96,3 +96,24 @@ elif age >= 0 and age < 18:
 else:
     print("Tuviste un error")
 
+
+"""
+Hacer un progmrama que pregunte la edad de una persona y responda lo siguiente:
+    -Si la edad es menor o igual que 4, entonces la entrada es gratuita
+
+    -Si la edad es menor de 18, pero mayor que 4
+    entonces la entrada cuesta $200
+
+    -Si la edad es mayor o igual a 18, entonces la entrada cuesta $400
+   
+
+"""
+
+if age <= 4 and age >=0:
+    print("La entrada es gratuita")
+elif age < 18 and age >4:
+    print("La entrada cuesta $200")
+elif age >= 18:
+    print("La entrada cuesta $400")    
+else:
+    print("Error, edad no valida")
