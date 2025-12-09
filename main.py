@@ -20,7 +20,11 @@ ENB = PWM(Pin(26))
 ENB.freq(1000)
 
 # Velocidad inicial (0–1023)
-speed = 520
+speed = 500
+
+# ---------------------------
+# FUNCIONES DE MOVIMIENTO
+# ---------------------------
 
 def stop():
     IN1.value(0)
@@ -62,16 +66,26 @@ def right():
     ENA.duty(speed)
     ENB.duty(speed)
 
+# ---------------------------
+# FUNCIÓN PARA CAMBIAR LA VELOCIDAD
+# ---------------------------
+
+def set_speed(value):
+    global speed
+    speed = value
+    print("Nueva velocidad:", speed)
+
 stop()
 
 # ---------------------------
 # CONEXIÓN WIFI MODO AP
 # ---------------------------
+
 ap = network.WLAN(network.AP_IF)
 ap.active(True)
 ap.config(essid="CarritoESP32", password="12345678")
 
-print("Conectate a la red WiFi: CarritoESP32")
+print("Conéctate al WiFi: CarritoESP32")
 print("Contraseña: 12345678")
 print("IP:", ap.ifconfig()[0])
 
@@ -95,11 +109,19 @@ def pagina_web():
     </head>
     <body>
       <h1>Control del Carrito ESP32</h1>
+
       <button onclick="location.href='/forward'">⬆ Adelante</button><br>
       <button onclick="location.href='/left'">⬅ Izquierda</button>
       <button onclick="location.href='/stop'">⛔ Stop</button>
       <button onclick="location.href='/right'">Derecha ➡</button><br>
       <button onclick="location.href='/backward'">⬇ Atrás</button>
+
+      <h2>Velocidad</h2>
+      <button onclick="location.href='/speed_low'">Lenta</button>
+      <button onclick="location.href='/speed_mid'">Media</button>
+      <button onclick="location.href='/speed_fast'">Rápida</button>
+      <button onclick="location.href='/speed_max'">Máxima</button>
+
     </body>
     </html>
     """
@@ -118,6 +140,10 @@ while True:
     print("Conexión desde:", addr)
     request = conn.recv(1024).decode()
 
+    # ---------------------------
+    # RUTAS DE MOVIMIENTO
+    # ---------------------------
+
     if "/forward" in request:
         forward()
     elif "/backward" in request:
@@ -128,6 +154,19 @@ while True:
         right()
     elif "/stop" in request:
         stop()
+
+    # ---------------------------
+    # RUTAS DE VELOCIDAD
+    # ---------------------------
+
+    elif "/speed_low" in request:
+        set_speed(350)
+    elif "/speed_mid" in request:
+        set_speed(600)
+    elif "/speed_fast" in request:
+        set_speed(850)
+    elif "/speed_max" in request:
+        set_speed(1023)
 
     response = pagina_web()
     conn.send("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n")
